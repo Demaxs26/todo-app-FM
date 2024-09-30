@@ -1,8 +1,10 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
 *{
     margin: 0;
     padding: 0;
+    font-family: "Josefin Sans";
+    color: var(--Very-Light-Gray);
 }
 
 :root{
@@ -17,7 +19,8 @@
     --Ligh-Grayish-Blue-hover: hsl(236, 33%, 92%);
     --Dark-Grayish-Blue: hsl(234, 11%, 52%);
     --Very-Dark-Grayish-Blue: hsl(233, 14%, 35%);
-    --Very-Dark-Grayish-Blue: hsl(237, 14%, 26%);
+    --Very-Dark-Grayish-Blue-two: hsl(237, 14%, 26%);
+    --todo-color: #25273c;
 }
 
 
@@ -26,5 +29,78 @@ body{
     background-image: url("images/bg-desktop-dark.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
+    display: grid;
+    place-content: center;
+    height: 30vh;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+}
+
+
+#Title-and-switch-box{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+h1{
+    letter-spacing: 1rem;
+}
+
+#switchBtn{
+    height: 26px;
+}
+
+
+
+
+.todo-box{
+    background-color: var(--Very-Dark-Grayish-Blue-two);
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5vh 1vw;
+}
+
+.todo-box:has( + div){
+    border-bottom: var(--Dark-Grayish-Blue) 0.5px solid;
+}
+
+.text-and-check{
+    display: flex;
+}
+
+input[type ="checkbox"]{
+
+    border: var(--Dark-Grayish-Blue )1px solid;
+    width: 20px;
+    height: 20px;
+
+
+}
+
+input[type="checkbox" i] {
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+    appearance: none;
+    align-self: center;
+   
+}
+
+input[type = text]{
+    background-color: unset;
+}
+
+input[type ="text" i]{
+    border: none;
+}
+
+:focus-visible{
+    outline-offset: unset;
+    outline: unset;
 }
 
