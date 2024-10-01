@@ -31,7 +31,7 @@ body{
     background-size: 100%;
     display: grid;
     place-content: center;
-    height: 30vh;
+    height: 100vh;
 }
 
 main{
@@ -78,7 +78,7 @@ input[type ="checkbox"]{
     border: var(--Dark-Grayish-Blue )1px solid;
     width: 20px;
     height: 20px;
-
+    margin-right: 20px;
 
 }
 
@@ -89,6 +89,38 @@ input[type="checkbox" i] {
     appearance: none;
     align-self: center;
    
+}
+
+input[type="checkbox"]:checked{
+
+    background-image: url('images/icon-check.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+    border: unset;
+
+}
+
+.bg-checked{
+    display: none;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    right: 40px;
+    margin-right: -20px;
+    z-index: 0;
+    border-radius: 100%;
+    background: rgb(107,188,243);
+    background: linear-gradient(161deg, rgba(107,188,243,1) 0%, rgba(166,116,242,1) 100%);
+    transition-delay: 250ms;
+    transition-duration: 4s;
+}
+
+input[type="checkbox"]:checked  + .bg-checked{
+    display: flex;
+    transform: scale(2);
+    
+    transform: scale(1);
 }
 
 input[type = text]{
