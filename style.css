@@ -21,6 +21,7 @@
     --Very-Dark-Grayish-Blue: hsl(233, 14%, 35%);
     --Very-Dark-Grayish-Blue-two: hsl(237, 14%, 26%);
     --todo-color: #25273c;
+    --selected-blue: #3360b5;
 }
 
 
@@ -44,6 +45,7 @@ main{
     display: flex;
     justify-content: space-between;
     width: 100%;
+    margin-bottom: 5vh;
 }
 
 
@@ -56,13 +58,24 @@ h1{
 }
 
 
+#main-block{
+    border-radius: 0.4rem;
+    overflow: hidden;
+    background-color: var(--todo-color);
+    -webkit-box-shadow: 0px 25px 35px 25px rgba(20, 21, 30,30%); 
+    box-shadow: 0px 40px 20px 25px rgba(20, 21, 30,30%);
+}
 
+.up-special{
+    border-radius: 0.4rem;
+    margin-bottom: 2vh;
+}
 
 .todo-box{
-    background-color: var(--Very-Dark-Grayish-Blue-two);
+    background-color: var(--todo-color);
     display: flex;
     justify-content: space-between;
-    padding: 1.5vh 1vw;
+    padding: 2vh 1vw;
 }
 
 .todo-box:has( + div){
@@ -98,11 +111,13 @@ input[type="checkbox"]:checked{
     background-repeat: no-repeat;
     z-index: 1;
     border: unset;
+    -webkit-animation:bump 0.35s  linear; /*for Google*/
+    -moz-animation:bump 0.35s  linear;/*for Firefox*/
 
 }
 
 .bg-checked{
-    display: none;
+    transform: scale(0);
     width: 20px;
     height: 20px;
     position: relative;
@@ -112,27 +127,121 @@ input[type="checkbox"]:checked{
     border-radius: 100%;
     background: rgb(107,188,243);
     background: linear-gradient(161deg, rgba(107,188,243,1) 0%, rgba(166,116,242,1) 100%);
-    transition-delay: 250ms;
-    transition-duration: 4s;
+
 }
 
 input[type="checkbox"]:checked  + .bg-checked{
-    display: flex;
-    transform: scale(2);
-    
+    -webkit-animation:bump 0.35s  linear; /*for Google*/
+    -moz-animation:bump 0.35s  linear;/*for Firefox*/
     transform: scale(1);
+}
+
+.text-and-check:has(input[type="checkbox"]:checked) > .text-todo-normal{
+    color: var(--Very-Dark-Grayish-Blue);
+    text-decoration: line-through ;
+    text-decoration-thickness: 0.05rem;
+}
+
+
+/* some stuff i took  from https://codepen.io/Rbk/pen/abLaoE for the bump effect when a todo is checked*/
+@-webkit-keyframes bump{/*for Google*/
+	0% {-webkit-transform:scale(1.5,1.5); opacity: 0.7;}
+	50% {-webkit-transform:scale(0.9,0.9); opacity: 0.9;}
+	100% {-webkit-transform:scale(1,1); opacity: 1;}
+}
+
+@-moz-keyframes bump{/*for Firefox*/
+	0% {-moz-transform:scale(1.5,1.5); opacity: 0.7;}
+	50% {-moz-transform:scale(0.9,0.9); opacity: 0.9;}
+	100% {-moz-transform:scale(1,1); opacity: 1;}
 }
 
 input[type = text]{
     background-color: unset;
+    font-size: 18px;
+    color: var(--Ligh-Grayish-Blue);
+    background-color:var(--todo-color);
+
 }
 
 input[type ="text" i]{
     border: none;
+    background-color:var(--todo-color);
 }
+
 
 :focus-visible{
     outline-offset: unset;
     outline: unset;
+    background-color:var(--todo-color);
 }
 
+.text-todo-normal{
+    align-self: center;
+    font-size: 18px;
+}
+
+.img-cross{
+    width: 18px;
+    height: 18px;
+    transform: scale(0);
+    transition: 330ms ease-in-out;
+}
+
+.todo-box:hover > .img-cross{
+    transform: scale(1);
+}
+
+#bottom-option-box{
+    border-top: var(--Dark-Grayish-Blue) 0.5px solid;
+    padding:  1.5vh 1vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nb-of-items{
+    color: var(--Dark-Grayish-Blue);
+    font-size: 14px;
+    margin-right: 5vw;
+}
+
+.three-middle-option{
+    display: flex;
+    margin-right: 2.5vw;
+}
+
+.middle-text{
+    color: var(--Dark-Grayish-Blue);
+    font-size: 15px;
+}
+
+.middle-text:has(+ .middle-text){
+    margin-right: 1vw;
+}
+
+
+
+.middle-text:hover{
+    color: var(--Ligh-Grayish-Blue)
+}
+
+.last-text{
+    color: var(--Dark-Grayish-Blue);
+    font-size: 15px;
+}
+
+.last-text:hover{
+    color: var(--Ligh-Grayish-Blue)
+}
+
+footer{
+    margin-top: 7vh;
+    display: grid;
+    place-content: center;
+}
+
+.footer-text{
+    font-size: 12px;
+    color: var(--Dark-Grayish-Blue);
+
+}
