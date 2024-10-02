@@ -75,7 +75,7 @@ h1{
     background-color: var(--todo-color);
     display: flex;
     justify-content: space-between;
-    padding: 2vh 1vw;
+    padding: 2vh 2vh;
 }
 
 .todo-box:has( + div){
@@ -156,17 +156,22 @@ input[type="checkbox"]:checked  + .bg-checked{
 	100% {-moz-transform:scale(1,1); opacity: 1;}
 }
 
-input[type = text]{
+.text-and-check{
+    width: 100%;
+}
+
+input[type = "text"]{
     background-color: unset;
-    font-size: 18px;
+    font-size: 1.125rem;
     color: var(--Ligh-Grayish-Blue);
     background-color:var(--todo-color);
-
+    width:100%;
 }
 
 input[type ="text" i]{
     border: none;
     background-color:var(--todo-color);
+    
 }
 
 
@@ -178,14 +183,19 @@ input[type ="text" i]{
 
 .text-todo-normal{
     align-self: center;
-    font-size: 18px;
+    font-size: 1.125rem;
+    width: clamp(1vw, 20vw, 30vw)
+    
 }
+
+
 
 .img-cross{
     width: 18px;
     height: 18px;
     transform: scale(0);
     transition: 330ms ease-in-out;
+    align-self: center;
 }
 
 .todo-box:hover > .img-cross{
@@ -194,14 +204,14 @@ input[type ="text" i]{
 
 #bottom-option-box{
     border-top: var(--Dark-Grayish-Blue) 0.5px solid;
-    padding:  1.5vh 1vw;
+    padding:  1.5vh 2vh;
     display: flex;
     justify-content: space-between;
 }
 
 .nb-of-items{
     color: var(--Dark-Grayish-Blue);
-    font-size: 14px;
+    font-size:0.875rem;
     margin-right: 5vw;
 }
 
@@ -212,7 +222,7 @@ input[type ="text" i]{
 
 .middle-text{
     color: var(--Dark-Grayish-Blue);
-    font-size: 15px;
+    font-size: 0.938rem;
 }
 
 .middle-text:has(+ .middle-text){
@@ -227,7 +237,7 @@ input[type ="text" i]{
 
 .last-text{
     color: var(--Dark-Grayish-Blue);
-    font-size: 15px;
+    font-size: 0.938rem;
 }
 
 .last-text:hover{
@@ -241,7 +251,47 @@ footer{
 }
 
 .footer-text{
-    font-size: 12px;
+    font-size: 0.75rem;
     color: var(--Dark-Grayish-Blue);
+
+}
+.three-middle-option-mobile{
+    display: none;
+    background-color: var(--todo-color);
+    place-content: center;
+    padding: 2vh 2vh;
+    border-radius: 0.4rem;
+    margin-top: 3vh;
+}
+
+.middle-box-modil{
+    display: flex;
+    width: 50vw;
+    justify-content: space-evenly;
+    
+}
+
+@media screen and (max-width: 700px ) {
+    body{
+        background-image: url("images/bg-mobile-dark.jpg");
+        height: 80vh;
+    }
+    main{
+        margin: 0 5vw;
+        width: 90vw
+    }
+    .img-cross{
+        transform: scale(1);
+    }
+    .three-middle-option{
+        display: none;
+    }
+    .three-middle-option-mobile{
+        display: grid;
+    }
+
+    .nb-of-items{
+        margin-right: 0;
+    }
 
 }
