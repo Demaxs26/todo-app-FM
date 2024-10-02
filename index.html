@@ -6,6 +6,7 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   <link href="style.css" rel="stylesheet" type="text/css" />  
+  <script src="script.js" defer></script>
   <title>Frontend Mentor | Todo app</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
@@ -23,9 +24,9 @@
       <div class ="todo-box up-special">
         
         <div class = "text-and-check">
-          <input type="checkbox" class = "empty-chekbox" name="" id="">
+          <input type="checkbox" class = "empty-chekbox" name="nexTodo" >
           <div class ="bg-checked"></div>
-          <input type="text" name="new-todo" id="" placeholder="Create a new todo...">
+          <input type="text" name="new-todo" id="text-todo-entry" placeholder="Create a new todo...">
         </div>
 
       </div>
@@ -45,56 +46,7 @@
           <img src="images/icon-cross.svg" alt="image cross" class = "img-cross">
         </div>
 
-        <div class ="todo-box">
-
-          <div  class = "text-and-check">
-            <input type="checkbox" class = "empty-chekbox" name="" id="">
-            <div class ="bg-checked"></div>
-            <p class ="text-todo-normal">Jog around the park 3x</p>
-          </div>
-
-          <img src="images/icon-cross.svg" alt="image cross" class = "img-cross">
-        </div>
-        <div class ="todo-box">
-          <div class = "text-and-check">
-            <input type="checkbox" class = "empty-chekbox" name="" id="">
-            <div class ="bg-checked"></div>
-            <p class ="text-todo-normal">Jog around the park 3x</p>
-          </div>
-
-          <img src="images/icon-cross.svg" alt="image cross" class = "img-cross">
-        </div>
-
-        <div class ="todo-box">
-
-          <div  class = "text-and-check">
-            <input type="checkbox" class = "empty-chekbox" name="" id="">
-            <div class ="bg-checked"></div>
-            <p class ="text-todo-normal">Jog around the park 3x</p>
-          </div>
-
-          <img src="images/icon-cross.svg" alt="image cross" class = "img-cross">
-        </div>
-        <div class ="todo-box">
-          <div class = "text-and-check">
-            <input type="checkbox" class = "empty-chekbox" name="" id="">
-            <div class ="bg-checked"></div>
-            <p class ="text-todo-normal">Jog around the park 3x</p>
-          </div>
-
-          <img src="images/icon-cross.svg" alt="image cross" class = "img-cross">
-        </div>
-
-        <div class ="todo-box">
-
-          <div  class = "text-and-check">
-            <input type="checkbox" class = "empty-chekbox" name="" id="">
-            <div class ="bg-checked"></div>
-            <p class ="text-todo-normal">Jog around the park 3x</p>
-          </div>
-
-          <img src="images/icon-cross.svg" alt="image cross" class = "img-cross">
-        </div>
+        
 
       </div>
 
@@ -114,7 +66,14 @@
 
   
   
-
+    <div class ="three-middle-option-mobile">
+      <div class ="middle-box-modil">
+        <p class ="middle-text">All</p>
+        <p class ="middle-text">Active </p>
+        <p class ="middle-text">Completed</p>
+      </div>
+     
+    </div>
   </main>
   <footer>
     <p class ="footer-text">Drag and drop to reorder list</p>
