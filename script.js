@@ -1,7 +1,14 @@
 const enterTodo = document.getElementById("text-todo-entry");
 const parentTodo = document.getElementById("box-all-task");
+const btnOnlyActiveMobil = document.querySelectorAll(".middle-box-modil .middle-text")[1];
+const btnOnlyCompletedMobil = document.querySelectorAll(".middle-box-modil .middle-text")[2];
+const btnOnlyActiveDesktop = document.querySelectorAll(".three-middle-option .middle-text")[1];
+const btnOnlyCompletedDesktop = document.querySelectorAll(".three-middle-option .middle-text")[2];
 
-tabTodo = []
+let tabTodo = [];
+let ActiveOrNot = true;
+let CompletedOrNot = true;
+
 
 function f_creerNewTodo(value){
     newTodo = document.createElement("div");
@@ -34,11 +41,83 @@ function f_reoganiseTodo(){
   }
 }
 
+function f_displayUndisplay(display1,display2,type){
+  for(i = 0; i<tabTodo.length; i++){  //verify for each todo if it is checked
+    if (type ===false){
+      if (tabTodo[i][1] === false){  
+        document.querySelectorAll(".todo-box")[i+1].style.display = display1;
+      }
+    }else{
+      if (tabTodo[i][1]){  
+        document.querySelectorAll(".todo-box")[i+1].style.display = display2;
+      }
+    }
+
+  }
+}
+
+function f_checkActive(){
+  if(ActiveOrNot){
+    
+    f_displayUndisplay("none","flex",false);
+    btnOnlyActiveMobil.style.color ="var(--Very-Light-Gray)";
+    btnOnlyActiveDesktop.style.color ="var(--Very-Light-Gray)";
+    ActiveOrNot = false;
+  }else{
+    
+    f_displayUndisplay("flex","flex",false);
+     btnOnlyActiveMobil.style.color ="var(--Dark-Grayish-Blue)";
+     btnOnlyActiveDesktop.style.color ="var(--Dark-Grayish-Blue)";
+    ActiveOrNot = true;
+  }
+}
+
+function f_checkCompleted(){
+  if(CompletedOrNot){
+
+    f_displayUndisplay("none",true);
+    btnOnlyCompletedMobil.style.color ="var(--Very-Light-Gray)";
+    btnOnlyCompletedDesktop.style.color ="var(--Very-Light-Gray)";
+    CompletedOrNot= false;
+  }else{
+
+    f_displayUndisplay("flex",true);
+    btnOnlyCompletedMobil.style.color ="var(--Dark-Grayish-Blue)";
+     btnOnlyCompletedDesktop.style.color ="var(--Dark-Grayish-Blue)";
+    CompletedOrNot = true;
+  }
+}
+
+
+btnOnlyActiveDesktop.addEventListener("click",function(){
+  f_checkActive()
+})
+btnOnlyActiveMobil.addEventListener("click", function(){
+  f_checkActive()
+})
+
+btnOnlyCompletedDesktop.addEventListener("click",function(){
+  f_checkCompleted()
+})
+btnOnlyCompletedMobil.addEventListener("click",function(){
+  f_checkCompleted()
+})
+
+
+
+function f_reorderThisTodo(todo){
+  if (ActiveOrNot === false){
+    document.querySelectorAll(".todo-box")[todo].style.display ="none";
+  }
+}
+
+
 function f_detectCheck(numChekbox){
 
   document.querySelectorAll(".empty-chekbox")[numChekbox+1].addEventListener("click", function(){
-    if (f_verifyCheck){
+    if (f_verifyCheck(numChekbox+1)){
       tabTodo[numChekbox][1] = false;
+      f_reorderThisTodo(numChekbox+1)
     }
     else{
       tabTodo[numChekbox][1] = true;
@@ -48,7 +127,8 @@ function f_detectCheck(numChekbox){
 }
 
 function f_verifyCheck(numChekbox){
-  return tdocument.querySelectorAll(".empty-chekbox")[numChekbox].checked
+  console.log(document.querySelectorAll(".empty-chekbox")[numChekbox].checked);
+  return document.querySelectorAll(".empty-chekbox")[numChekbox].checked
 
 }
 
