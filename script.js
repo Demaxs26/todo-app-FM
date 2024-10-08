@@ -4,11 +4,16 @@ const btnOnlyActiveMobil = document.querySelectorAll(".middle-box-modil .middle-
 const btnOnlyCompletedMobil = document.querySelectorAll(".middle-box-modil .middle-text")[2];
 const btnOnlyActiveDesktop = document.querySelectorAll(".three-middle-option .middle-text")[1];
 const btnOnlyCompletedDesktop = document.querySelectorAll(".three-middle-option .middle-text")[2];
+const btnAllDesktop = document.querySelectorAll(".three-middle-option .middle-text")[0];
+const btnAllMobil = document.querySelectorAll(".middle-box-modil .middle-text")[0];
 
 let tabTodo = [];
 let ActiveOrNot = true;
 let CompletedOrNot = true;
 
+
+const colornormal = "var(--Dark-Grayish-Blue)";
+const colorfocus = "var(--Very-Light-Gray)";
 
 function f_creerNewTodo(value){
     newTodo = document.createElement("div");
@@ -47,47 +52,78 @@ function f_displayUndisplay(display1,display2,type){
       if (tabTodo[i][1] === false){  
         document.querySelectorAll(".todo-box")[i+1].style.display = display1;
       }
+     else{  
+          document.querySelectorAll(".todo-box")[i+1].style.display = display2;
+      }
     }else{
-      if (tabTodo[i][1]){  
+      if (tabTodo[i][1] === false){  
         document.querySelectorAll(".todo-box")[i+1].style.display = display2;
+      }
+     else{  
+          document.querySelectorAll(".todo-box")[i+1].style.display = display1;
       }
     }
 
   }
 }
 
+function changeActive(togle,color){
+  btnOnlyActiveMobil.style.color =color;
+  btnOnlyActiveDesktop.style.color =color;
+  ActiveOrNot = togle;
+}
+
+function changeCompleted(togle,color){
+  btnOnlyCompletedMobil.style.color =color;
+  btnOnlyCompletedDesktop.style.color =color;
+  CompletedOrNot = togle;
+}
+
+
 function f_checkActive(){
   if(ActiveOrNot){
-    
+    if (CompletedOrNot === false){
+      CompletedOrNot = true
+      changeCompleted(true,colornormal)
+    }
     f_displayUndisplay("none","flex",false);
-    btnOnlyActiveMobil.style.color ="var(--Very-Light-Gray)";
-    btnOnlyActiveDesktop.style.color ="var(--Very-Light-Gray)";
-    ActiveOrNot = false;
+    changeActive(false,colorfocus)
+
+
   }else{
-    
     f_displayUndisplay("flex","flex",false);
-     btnOnlyActiveMobil.style.color ="var(--Dark-Grayish-Blue)";
-     btnOnlyActiveDesktop.style.color ="var(--Dark-Grayish-Blue)";
-    ActiveOrNot = true;
+    changeActive(true,colornormal)
+    changeCompleted(true,colornormal)
+    ActiveOrNot = true
   }
 }
+
 
 function f_checkCompleted(){
   if(CompletedOrNot){
-
-    f_displayUndisplay("none",true);
-    btnOnlyCompletedMobil.style.color ="var(--Very-Light-Gray)";
-    btnOnlyCompletedDesktop.style.color ="var(--Very-Light-Gray)";
-    CompletedOrNot= false;
+    if (ActiveOrNot === false){
+      ActiveOrNot = true
+      changeActive(true,colornormal)
+    }
+    f_displayUndisplay("none","flex",true);
+    changeCompleted(false,colorfocus)
   }else{
 
-    f_displayUndisplay("flex",true);
-    btnOnlyCompletedMobil.style.color ="var(--Dark-Grayish-Blue)";
-     btnOnlyCompletedDesktop.style.color ="var(--Dark-Grayish-Blue)";
-    CompletedOrNot = true;
+    f_displayUndisplay("flex","flex",true);
+    changeCompleted(true,colornormal)
+    changeActive(true,colornormal)
+    CompletedOrNot = true
   }
 }
 
+function f_activeAll(){
+  changeCompleted(true,colornormal)
+  changeActive(true,colornormal)
+  CompletedOrNot = true
+  ActiveOrNot = true
+  f_displayUndisplay("flex","flex",true);
+
+}
 
 btnOnlyActiveDesktop.addEventListener("click",function(){
   f_checkActive()
@@ -100,9 +136,17 @@ btnOnlyCompletedDesktop.addEventListener("click",function(){
   f_checkCompleted()
 })
 btnOnlyCompletedMobil.addEventListener("click",function(){
+
   f_checkCompleted()
 })
 
+btnAllDesktop.addEventListener("click",function(){
+  f_activeAll()
+})
+
+btnAllMobil.addEventListener("click",function(){
+  f_activeAll()
+})
 
 
 function f_reorderThisTodo(todo){
@@ -122,12 +166,10 @@ function f_detectCheck(numChekbox){
     else{
       tabTodo[numChekbox][1] = true;
     }
-    console.log(tabTodo)
   })
 }
 
 function f_verifyCheck(numChekbox){
-  console.log(document.querySelectorAll(".empty-chekbox")[numChekbox].checked);
   return document.querySelectorAll(".empty-chekbox")[numChekbox].checked
 
 }
