@@ -28,6 +28,7 @@ function f_creerNewTodo(value){
           <img src="images/icon-cross.svg" alt="image cross" class = "img-cross">`;
     parentTodo.appendChild(newTodo);
     f_detectCheck(tabTodo.length-1);
+    f_detectDelet(tabTodo.length-1,newTodo);
 }
 
 function f_downClassemment(first,second){
@@ -155,6 +156,12 @@ function f_reorderThisTodo(todo){
   }
 }
 
+function f_detectDelet(numChekbox,newTodo){
+  document.querySelectorAll(".img-cross")[numChekbox].addEventListener("click",function(){
+    parentTodo.removeChild(newTodo);
+    tabTodo.splice(numChekbox,1);
+  },{once :true})
+}
 
 function f_detectCheck(numChekbox){
 
