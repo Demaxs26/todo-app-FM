@@ -6,6 +6,8 @@ const btnOnlyActiveDesktop = document.querySelectorAll(".three-middle-option .mi
 const btnOnlyCompletedDesktop = document.querySelectorAll(".three-middle-option .middle-text")[2];
 const btnAllDesktop = document.querySelectorAll(".three-middle-option .middle-text")[0];
 const btnAllMobil = document.querySelectorAll(".middle-box-modil .middle-text")[0];
+const btnclearCompleted = document.querySelector(".last-text")
+
 
 let tabTodo = [];
 let ActiveOrNot = true;
@@ -48,7 +50,7 @@ function f_reoganiseTodo(){
 }
 
 function f_displayUndisplay(display1,display2,type){
-  for(i = 0; i<tabTodo.length; i++){  //verify for each todo if it is checked
+  for(let i = 0; i<tabTodo.length; i++){  //verify for each todo if it is checked
     if (type ===false){
       if (tabTodo[i][1] === false){  
         document.querySelectorAll(".todo-box")[i+1].style.display = display1;
@@ -126,6 +128,19 @@ function f_activeAll(){
 
 }
 
+function f_deleteChecked(){
+  let children = parentTodo.children;
+  
+  for (let i  = tabTodo.length-1;i>0;i--){
+    console.log(tabTodo[i]);
+    if (tabTodo[i][1] == false){
+
+      parentTodo.removeChild(children[i])
+      tabTodo.splice(i,1);
+    }
+  }
+}
+
 btnOnlyActiveDesktop.addEventListener("click",function(){
   f_checkActive()
 })
@@ -147,6 +162,10 @@ btnAllDesktop.addEventListener("click",function(){
 
 btnAllMobil.addEventListener("click",function(){
   f_activeAll()
+})
+
+btnclearCompleted.addEventListener("click", function(){
+  f_deleteChecked()
 })
 
 
