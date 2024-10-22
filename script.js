@@ -12,10 +12,15 @@ const btnclearCompleted = document.querySelector(".last-text")
 let tabTodo = [];
 let ActiveOrNot = true;
 let CompletedOrNot = true;
+let AllOrNot = false;
 
 
 const colornormal = "var(--Dark-Grayish-Blue)";
 const colorfocus = "var(--Very-Light-Gray)";
+
+
+btnAllDesktop.style.color = colorfocus
+btnAllMobil.style.color = colorfocus
 
 function f_creerNewTodo(value){
     newTodo = document.createElement("div");
@@ -82,12 +87,20 @@ function changeCompleted(togle,color){
   CompletedOrNot = togle;
 }
 
+function changeAll(togle,color){
+  btnAllDesktop.style.color = color;
+  btnAllMobil.style.color = color;
+  AllOrNot = togle;
+}
 
 function f_checkActive(){
   if(ActiveOrNot){
     if (CompletedOrNot === false){
       CompletedOrNot = true
       changeCompleted(true,colornormal)
+    }else if(AllOrNot === false){
+      AllOrNot = true
+      changeAll(true,colornormal)
     }
     f_displayUndisplay("none","flex",false);
     changeActive(false,colorfocus)
@@ -95,9 +108,10 @@ function f_checkActive(){
 
   }else{
     f_displayUndisplay("flex","flex",false);
-    changeActive(true,colornormal)
-    changeCompleted(true,colornormal)
-    ActiveOrNot = true
+    changeActive(true,colornormal);
+    changeCompleted(true,colornormal);
+    ActiveOrNot = true;
+    changeAll(false,colorfocus);
   }
 }
 
@@ -120,12 +134,30 @@ function f_checkCompleted(){
 }
 
 function f_activeAll(){
+  if(AllOrNot){
+    changeAll(true,colornormal)
+    AllOrNot = false
+  }else{
+    changeAll(false,colorfocus)
+    AllOrNot = true
+    
+  }
+  if(CompletedOrNot == false){
+    CompletedOrNot = true
+    changeCompleted(true,colornormal)
+  }
+  if (ActiveOrNot == false){
+    ActiveOrNot = true
+    changeActive(true,colornormal)
+  }
   changeCompleted(true,colornormal)
   changeActive(true,colornormal)
   CompletedOrNot = true
   ActiveOrNot = true
   f_displayUndisplay("flex","flex",true);
+    
 
+  
 }
 
 function f_deleteChecked(){
