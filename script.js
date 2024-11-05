@@ -8,12 +8,54 @@ const btnAllDesktop = document.querySelectorAll(".three-middle-option .middle-te
 const btnAllMobil = document.querySelectorAll(".middle-box-modil .middle-text")[0];
 const btnclearCompleted = document.querySelector(".last-text")
 
-
 let tabTodo = [];
-let ActiveOrNot = true;
-let CompletedOrNot = true;
-let AllOrNot = false;
 
+let dict = {
+  ALL: true,
+  Active: false,
+  Completed: false,
+  // etc.
+};
+function ALL(){
+
+}
+
+function Active(){
+
+}
+
+function Completed(){
+
+}
+function changeDico(focus){
+  if (focus == 'ALL'){
+    dict['ALL'] = true;
+    dict['Active'] = false;
+    dict['Completed'] = false;
+  }
+  else if (focus == 'Active'){
+    if (dict['Active'] == true){
+      ALL()
+    }
+    else{
+      dict['ALL'] = true;
+      dict['Active'] = false;
+      dict['Completed'] = false;
+      Active()
+    }
+  }
+  else{
+    if (dict['Completed'] == true){
+      ALL()
+    }else{
+      dict['ALL'] = true;
+      dict['Active'] = false;
+      dict['Completed'] = false;
+      Completed()
+    }
+
+  }
+}
 
 const colornormal = "var(--Dark-Grayish-Blue)";
 const colorfocus = "var(--Very-Light-Gray)";
@@ -54,150 +96,33 @@ function f_reoganiseTodo(){
   }
 }
 
-function f_displayUndisplay(display1,display2,type){
-  for(let i = 0; i<tabTodo.length; i++){  //verify for each todo if it is checked
-    if (type ===false){
-      if (tabTodo[i][1] === false){  
-        document.querySelectorAll(".todo-box")[i+1].style.display = display1;
-      }
-     else{  
-          document.querySelectorAll(".todo-box")[i+1].style.display = display2;
-      }
-    }else{
-      if (tabTodo[i][1] === false){  
-        document.querySelectorAll(".todo-box")[i+1].style.display = display2;
-      }
-     else{  
-          document.querySelectorAll(".todo-box")[i+1].style.display = display1;
-      }
-    }
 
-  }
-}
-
-function changeActive(togle,color){
-  btnOnlyActiveMobil.style.color =color;
-  btnOnlyActiveDesktop.style.color =color;
-  ActiveOrNot = togle;
-}
-
-function changeCompleted(togle,color){
-  btnOnlyCompletedMobil.style.color =color;
-  btnOnlyCompletedDesktop.style.color =color;
-  CompletedOrNot = togle;
-}
-
-function changeAll(togle,color){
-  btnAllDesktop.style.color = color;
-  btnAllMobil.style.color = color;
-  AllOrNot = togle;
-}
-
-function f_checkActive(){
-  if(ActiveOrNot){
-    if (CompletedOrNot === false){
-      CompletedOrNot = true
-      changeCompleted(true,colornormal)
-    }else if(AllOrNot === false){
-      AllOrNot = true
-      changeAll(true,colornormal)
-    }
-    f_displayUndisplay("none","flex",false);
-    changeActive(false,colorfocus)
-
-
-  }else{
-    f_displayUndisplay("flex","flex",false);
-    changeActive(true,colornormal);
-    changeCompleted(true,colornormal);
-    ActiveOrNot = true;
-    changeAll(false,colorfocus);
-  }
-}
-
-
-function f_checkCompleted(){
-  if(CompletedOrNot){
-    if (ActiveOrNot === false){
-      ActiveOrNot = true
-      changeActive(true,colornormal)
-    }
-    f_displayUndisplay("none","flex",true);
-    changeCompleted(false,colorfocus)
-  }else{
-
-    f_displayUndisplay("flex","flex",true);
-    changeCompleted(true,colornormal)
-    changeActive(true,colornormal)
-    CompletedOrNot = true
-  }
-}
-
-function f_activeAll(){
-  if(AllOrNot){
-    changeAll(true,colornormal)
-    AllOrNot = false
-  }else{
-    changeAll(false,colorfocus)
-    AllOrNot = true
-    
-  }
-  if(CompletedOrNot == false){
-    CompletedOrNot = true
-    changeCompleted(true,colornormal)
-  }
-  if (ActiveOrNot == false){
-    ActiveOrNot = true
-    changeActive(true,colornormal)
-  }
-  changeCompleted(true,colornormal)
-  changeActive(true,colornormal)
-  CompletedOrNot = true
-  ActiveOrNot = true
-  f_displayUndisplay("flex","flex",true);
-    
-
-  
-}
-
-function f_deleteChecked(){
-  let children = parentTodo.children;
-  
-  for (let i  = tabTodo.length-1;i>0;i--){
-    console.log(tabTodo[i]);
-    if (tabTodo[i][1] == false){
-
-      parentTodo.removeChild(children[i])
-      tabTodo.splice(i,1);
-    }
-  }
-}
 
 btnOnlyActiveDesktop.addEventListener("click",function(){
-  f_checkActive()
+  changeDico("Active")
 })
 btnOnlyActiveMobil.addEventListener("click", function(){
-  f_checkActive()
+  changeDico("Active")
 })
 
 btnOnlyCompletedDesktop.addEventListener("click",function(){
-  f_checkCompleted()
+  changeDico("Completed")
 })
 btnOnlyCompletedMobil.addEventListener("click",function(){
 
-  f_checkCompleted()
+  changeDico("Completed")
 })
 
 btnAllDesktop.addEventListener("click",function(){
-  f_activeAll()
+  changeDico("ALL")
 })
 
 btnAllMobil.addEventListener("click",function(){
-  f_activeAll()
+  changeDico("ALL")
 })
 
 btnclearCompleted.addEventListener("click", function(){
-  f_deleteChecked()
+  changeDico("Completed")
 })
 
 
