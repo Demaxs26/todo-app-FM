@@ -16,53 +16,57 @@ let dict = {
   Completed: false,
   // etc.
 };
-function ALL(){
 
+function changeDisplay(){
+  
+  for (i = 0;i<tabTodo.length;i++){
+    document.querySelectorAll(".todo-box")[i+1].style.display = ;
+    console.log(tabTodo[i]);
+  };
+}
+
+function changeColor(){
+  btnAllDesktop.style.color = colorbtn[dict['ALL'] === true ? 1 : 0]
+  btnAllMobil.style.color = colorbtn[dict['ALL'] === true ? 1 : 0]
+  btnOnlyActiveDesktop.style.color = colorbtn[dict['Active'] === true ? 1 : 0]
+  btnOnlyActiveMobil.style.color = colorbtn[dict['Active'] === true ? 1 : 0]
+  btnOnlyCompletedDesktop.style.color = colorbtn[dict['Completed'] === true ? 1 : 0]
+  btnOnlyCompletedMobil.style.color = colorbtn[dict['Completed'] === true ? 1 : 0]
+}
+
+
+function ALL(){
+  dict['ALL'] = true;
+  dict['Active'] = false;
+  dict['Completed'] = false;
 }
 
 function Active(){
-
+  dict['ALL'] = false;
+  dict['Active'] = true;
+  dict['Completed'] = false;
 }
 
 function Completed(){
-
+  dict['ALL'] = false;
+  dict['Active'] = false;
+  dict['Completed'] = true;
 }
+
 function changeDico(focus){
-  if (focus == 'ALL'){
-    dict['ALL'] = true;
-    dict['Active'] = false;
-    dict['Completed'] = false;
-  }
-  else if (focus == 'Active'){
-    if (dict['Active'] == true){
-      ALL()
-    }
-    else{
-      dict['ALL'] = true;
-      dict['Active'] = false;
-      dict['Completed'] = false;
-      Active()
-    }
-  }
-  else{
-    if (dict['Completed'] == true){
-      ALL()
-    }else{
-      dict['ALL'] = true;
-      dict['Active'] = false;
-      dict['Completed'] = false;
-      Completed()
-    }
-
-  }
+  focus === 'ALL' ? ALL() : focus === 'Active' ? (dict['Active'] ? ALL() : Active() ): dict['Completed'] ? ALL() : Completed()
+  console.log(dict);
+  changeColor()
+  changeDisplay()
 }
 
-const colornormal = "var(--Dark-Grayish-Blue)";
-const colorfocus = "var(--Very-Light-Gray)";
+
+const colorbtn = ["var(--Dark-Grayish-Blue)","var(--selected-blue)"];
 
 
-btnAllDesktop.style.color = colorfocus
-btnAllMobil.style.color = colorfocus
+
+btnAllDesktop.style.color = colorbtn[1];
+btnAllMobil.style.color = colorbtn[1]
 
 function f_creerNewTodo(value){
     newTodo = document.createElement("div");
