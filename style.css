@@ -224,6 +224,7 @@ input[type ="text" i]{
 .middle-text{
     color: var(--Dark-Grayish-Blue);
     font-size: 0.938rem;
+    cursor: pointer;
 }
 
 .middle-text:has(+ .middle-text){
@@ -239,6 +240,7 @@ input[type ="text" i]{
 .last-text{
     color: var(--Dark-Grayish-Blue);
     font-size: 0.938rem;
+    cursor: pointer;
 }
 
 .last-text:hover{
@@ -254,6 +256,7 @@ footer{
 .footer-text{
     font-size: 0.75rem;
     color: var(--Dark-Grayish-Blue);
+    cursor: pointer;
 
 }
 .three-middle-option-mobile{
