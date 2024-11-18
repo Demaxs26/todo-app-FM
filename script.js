@@ -18,20 +18,20 @@ let dict = {
 };
 
 function changeDisplay(){
-  
+  change = dict['Active'] ? false : (dict['ALL'] ? "different" : true)  
   for (i = 0;i<tabTodo.length;i++){
-    document.querySelectorAll(".todo-box")[i+1].style.display = ;
-    console.log(tabTodo[i]);
+    document.querySelectorAll(".todo-box")[i+1].style.display = tabTodo[i][1] != change  ? "flex":"none";
+    // console.log(tabTodo[i]);
   };
 }
 
 function changeColor(){
-  btnAllDesktop.style.color = colorbtn[dict['ALL'] === true ? 1 : 0]
-  btnAllMobil.style.color = colorbtn[dict['ALL'] === true ? 1 : 0]
-  btnOnlyActiveDesktop.style.color = colorbtn[dict['Active'] === true ? 1 : 0]
-  btnOnlyActiveMobil.style.color = colorbtn[dict['Active'] === true ? 1 : 0]
-  btnOnlyCompletedDesktop.style.color = colorbtn[dict['Completed'] === true ? 1 : 0]
-  btnOnlyCompletedMobil.style.color = colorbtn[dict['Completed'] === true ? 1 : 0]
+  btnAllDesktop.style.color = colorbtn[dict['ALL'] ? 1 : 0]
+  btnAllMobil.style.color = colorbtn[dict['ALL'] ? 1 : 0]
+  btnOnlyActiveDesktop.style.color = colorbtn[dict['Active'] ? 1 : 0]
+  btnOnlyActiveMobil.style.color = colorbtn[dict['Active'] ? 1 : 0]
+  btnOnlyCompletedDesktop.style.color = colorbtn[dict['Completed'] ? 1 : 0]
+  btnOnlyCompletedMobil.style.color = colorbtn[dict['Completed'] ? 1 : 0]
 }
 
 
@@ -129,17 +129,12 @@ btnclearCompleted.addEventListener("click", function(){
   changeDico("Completed")
 })
 
-
-function f_reorderThisTodo(todo){
-  if (ActiveOrNot === false){
-    document.querySelectorAll(".todo-box")[todo].style.display ="none";
-  }
-}
-
 function f_detectDelet(numChekbox,newTodo){
   document.querySelectorAll(".img-cross")[numChekbox].addEventListener("click",function(){
     parentTodo.removeChild(newTodo);
+    console.log(tabTodo);
     tabTodo.splice(numChekbox,1);
+    console.log(tabTodo);
   },{once :true})
 }
 
@@ -148,15 +143,19 @@ function f_detectCheck(numChekbox){
   document.querySelectorAll(".empty-chekbox")[numChekbox+1].addEventListener("click", function(){
     if (f_verifyCheck(numChekbox+1)){
       tabTodo[numChekbox][1] = false;
-      f_reorderThisTodo(numChekbox+1)
+      
     }
     else{
       tabTodo[numChekbox][1] = true;
     }
+    changeDisplay();
   })
 }
 
 function f_verifyCheck(numChekbox){
+  console.log(numChekbox,tabTodo.length);
+  numChekbox >= tabTodo.length ? numChekbox = tabTodo.length:pass;
+  console.log(numChekbox);
   return document.querySelectorAll(".empty-chekbox")[numChekbox].checked
 
 }
