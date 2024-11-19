@@ -6,8 +6,10 @@ const btnOnlyActiveDesktop = document.querySelectorAll(".three-middle-option .mi
 const btnOnlyCompletedDesktop = document.querySelectorAll(".three-middle-option .middle-text")[2];
 const btnAllDesktop = document.querySelectorAll(".three-middle-option .middle-text")[0];
 const btnAllMobil = document.querySelectorAll(".middle-box-modil .middle-text")[0];
-const btnclearCompleted = document.querySelector(".last-text")
+const btnclearCompleted = document.querySelector(".last-text");
+const nbItemDisplay = document.querySelector(".nb-of-items");
 
+let nbItems = 0
 let tabTodo = [];
 
 let dict = {
@@ -17,6 +19,11 @@ let dict = {
   // etc.
 };
 
+
+function changeNbitems(x){
+  nbItems += x
+  nbItemDisplay.textContent = `${nbItems} items left` ;
+}
 function changeDisplay(){
   change = dict['Active'] ? false : (dict['ALL'] ? "different" : true)  
   for (i = 0;i<tabTodo.length;i++){
@@ -79,6 +86,7 @@ function f_creerNewTodo(value){
           </div>
           <img src="images/icon-cross.svg" alt="image cross" class = "img-cross">`;
     parentTodo.appendChild(newTodo);
+    changeNbitems(1);
     f_detectCheck(tabTodo.length-1);
     f_detectDelet(tabTodo.length-1,newTodo);
 }
@@ -132,6 +140,7 @@ function f_detectDelet(numChekbox,newTodo){
   document.querySelectorAll(".img-cross")[numChekbox].addEventListener("click",function(){
     document.querySelectorAll(".todo-box")[numChekbox+1].style.display = "none"
     tabTodo[numChekbox][2] = false
+    changeNbitems(-1);
   },{once :true})
 }
 
