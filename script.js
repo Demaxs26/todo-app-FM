@@ -20,7 +20,7 @@ let dict = {
 function changeDisplay(){
   change = dict['Active'] ? false : (dict['ALL'] ? "different" : true)  
   for (i = 0;i<tabTodo.length;i++){
-    document.querySelectorAll(".todo-box")[i+1].style.display = tabTodo[i][1] != change  ? "flex":"none";
+    document.querySelectorAll(".todo-box")[i+1].style.display = tabTodo[i][1] != change  ? (tabTodo[i][2] ? "flex" : "none"):"none";
     // console.log(tabTodo[i]);
   };
 }
@@ -55,9 +55,8 @@ function Completed(){
 
 function changeDico(focus){
   focus === 'ALL' ? ALL() : focus === 'Active' ? (dict['Active'] ? ALL() : Active() ): dict['Completed'] ? ALL() : Completed()
-  console.log(dict);
-  changeColor()
-  changeDisplay()
+  changeColor();
+  changeDisplay();
 }
 
 
@@ -131,10 +130,8 @@ btnclearCompleted.addEventListener("click", function(){
 
 function f_detectDelet(numChekbox,newTodo){
   document.querySelectorAll(".img-cross")[numChekbox].addEventListener("click",function(){
-    parentTodo.removeChild(newTodo);
-    console.log(tabTodo);
-    tabTodo.splice(numChekbox,1);
-    console.log(tabTodo);
+    document.querySelectorAll(".todo-box")[numChekbox+1].style.display = "none"
+    tabTodo[numChekbox][2] = false
   },{once :true})
 }
 
@@ -153,9 +150,6 @@ function f_detectCheck(numChekbox){
 }
 
 function f_verifyCheck(numChekbox){
-  console.log(numChekbox,tabTodo.length);
-  numChekbox >= tabTodo.length ? numChekbox = tabTodo.length:pass;
-  console.log(numChekbox);
   return document.querySelectorAll(".empty-chekbox")[numChekbox].checked
 
 }
@@ -167,7 +161,7 @@ function f_supprimerValue(){
 document.addEventListener('keypress', function (e) {
     if (e.key === 'Enter' && enterTodo.value !="") { // verify if the key pressed is enter and if there is text in the input
       console.log("create new todo" ,enterTodo.value);
-      tabTodo.push([enterTodo.value, true]);
+      tabTodo.push([enterTodo.value, true,true]);
       f_creerNewTodo(enterTodo.value);  // create a new todo
       
 
