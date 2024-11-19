@@ -91,21 +91,7 @@ function f_creerNewTodo(value){
     f_detectDelet(tabTodo.length-1,newTodo);
 }
 
-function f_downClassemment(first,second){
-  document.parentTodo.insertBefore(first,second)
-}
 
-function f_upClassemment(first,second){
-  document.parentTodo.insertBefore(second,first)
-}
-
-function f_reoganiseTodo(){
-  for (let i  = tabTodo.length;i>0;i--){
-    if (tabTodo[i][1] == false){
-      document.parentTodo.insertBefore(first,second)
-    }
-  }
-}
 
 
 
@@ -132,8 +118,15 @@ btnAllMobil.addEventListener("click",function(){
   changeDico("ALL")
 })
 
+
 btnclearCompleted.addEventListener("click", function(){
-  changeDico("Completed")
+  for(i=0;i<tabTodo.length;i++){
+    if (tabTodo[i][1] === false && tabTodo[i][2]){
+      document.querySelectorAll(".todo-box")[i+1].style.display = "none"
+      tabTodo[i][2] = false
+      changeNbitems(-1);
+    }
+  }
 })
 
 function f_detectDelet(numChekbox,newTodo){
@@ -159,13 +152,11 @@ function f_detectCheck(numChekbox){
 }
 
 function f_verifyCheck(numChekbox){
-  return document.querySelectorAll(".empty-chekbox")[numChekbox].checked
+  return document.querySelectorAll(".empty-chekbox")[numChekbox].checked 
 
 }
 
-function f_supprimerValue(){
-    enterTodo.value = "";  // deleted the text in the input 
-}
+
 
 document.addEventListener('keypress', function (e) {
     if (e.key === 'Enter' && enterTodo.value !="") { // verify if the key pressed is enter and if there is text in the input
