@@ -20,6 +20,7 @@ let dict = {
 };
 
 
+
 function changeNbitems(x){
   nbItems += x
   nbItemDisplay.textContent = `${nbItems} items left` ;
@@ -77,8 +78,9 @@ btnAllMobil.style.color = colorbtn[1]
 function f_creerNewTodo(value){
     newTodo = document.createElement("div");
     newTodo.classList.add("todo-box");
+    newTodo.setAttribute("draggable","true")
     newTodo.innerHTML = `
-    <div class = "text-and-check">
+    <div class = "text-and-check" >
             <input type="checkbox" class = "empty-chekbox" name="" id="">
             <div class ="bg-checked"></div>
             <p class ="text-todo-normal">${value}</p>
@@ -138,7 +140,9 @@ function f_detectDelet(numChekbox,newTodo){
 }
 
 function f_detectCheck(numChekbox){
-
+  document.querySelectorAll(".todo-box")[numChekbox+1].addEventListener("drag", (event)=>{
+    console.log("draging")
+  })
   document.querySelectorAll(".empty-chekbox")[numChekbox+1].addEventListener("click", function(){
     if (f_verifyCheck(numChekbox+1)){
       tabTodo[numChekbox][1] = false;
@@ -156,7 +160,9 @@ function f_verifyCheck(numChekbox){
 
 }
 
-
+function f_supprimerValue(){
+  enterTodo.value = ""
+}
 
 document.addEventListener('keypress', function (e) {
     if (e.key === 'Enter' && enterTodo.value !="") { // verify if the key pressed is enter and if there is text in the input
