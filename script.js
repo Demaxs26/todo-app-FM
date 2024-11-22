@@ -8,7 +8,7 @@ const btnAllDesktop = document.querySelectorAll(".three-middle-option .middle-te
 const btnAllMobil = document.querySelectorAll(".middle-box-modil .middle-text")[0];
 const btnclearCompleted = document.querySelector(".last-text");
 const nbItemDisplay = document.querySelector(".nb-of-items");
-
+const switchBtn = document.querySelector(".switchBtn");
 let nbItems = 0
 let tabTodo = [];
 
@@ -18,8 +18,20 @@ let dict = {
   Completed: false,
   // etc.
 };
+mode = 0;
+switchBtn.addEventListener("click",function(){
+  mode === 0 ?  lightMode(): darkMode();
+})
 
+function darkMode(){
+  switchBtn.src = "images/icon-sun.svg";
+  mode = 0;
+}
 
+function lightMode(){
+  switchBtn.src = "images/icon-moon.svg";
+  mode = 1;
+}
 
 function changeNbitems(x){
   nbItems += x
