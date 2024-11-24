@@ -9,7 +9,10 @@ const btnAllMobil = document.querySelectorAll(".middle-box-modil .middle-text")[
 const btnclearCompleted = document.querySelector(".last-text");
 const nbItemDisplay = document.querySelector(".nb-of-items");
 const switchBtn = document.querySelector(".switchBtn");
-let nbItems = 0
+const background = document.querySelector("body");
+const root = document.querySelector(":root");
+
+let nbItems = 0;
 let tabTodo = [];
 
 let dict = {
@@ -25,11 +28,29 @@ switchBtn.addEventListener("click",function(){
 
 function darkMode(){
   switchBtn.src = "images/icon-sun.svg";
+  background.style.backgroundImage = "url('images/bg-desktop-dark.jpg')";
+  root.style.setProperty('--todo-color', '#25273c');
+  root.style.setProperty('--Very-Dark-Blue', 'hsl(235, 21%, 11%)');
+  root.style.setProperty('--Very-Light-Gray', 'hsl(0, 0%, 98%)');
+  root.style.setProperty('--Dark-Grayish-Blue', 'hsl(234, 11%, 52%)');
+  root.style.setProperty('--Light-Grayish-Blue', 'hsl(233, 11%, 84%)');
+
+
+
   mode = 0;
 }
 
 function lightMode(){
   switchBtn.src = "images/icon-moon.svg";
+  background.style.backgroundImage = "url('images/bg-desktop-light.jpg')";
+  root.style.setProperty('--todo-color', 'hsl(0, 0%, 98%)');
+  root.style.setProperty('--Very-Dark-Blue', 'hsl(236, 33%, 92%)');
+  root.style.setProperty('--Very-Light-Gray', 'hsl(235, 24%, 19%)');
+  root.style.setProperty('--Dark-Grayish-Blue', 'hsl(233, 11%, 84%)');
+  root.style.setProperty('--Light-Grayish-Blue', 'hsl(235, 21%, 11%)');
+
+
+
   mode = 1;
 }
 
